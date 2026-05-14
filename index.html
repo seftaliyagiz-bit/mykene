@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mykene — Belgische Brasserie · Muntstraat 44 · Leuven</title>
+  <meta name="description" content="Mykene is een van Leuvens meest geliefde Belgische restaurants in een prachtig gerestaureerd 17e-eeuws herenhuis op de Muntstraat. Chef Stijn Gille werkt uitsluitend met verse, seizoensgebonden ingrediënten." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --ivory: #faf6ee;
+      --green: #1e3d2a;
+      --green-dark: #122518;
+      --gold: #b8922a;
+      --burgundy: #7a1f2e;
+      --charcoal: #1a1a1a;
+      --white: #ffffff;
+      --cream: #f5ead6;
+      --shadow: 0 4px 24px rgba(30,61,42,0.13);
+      --radius: 12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      color: var(--charcoal);
+      background: var(--ivory);
+      line-height: 1.7;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      line-height: 1.2;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.75rem;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── NAVBAR ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--ivory);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 70px;
+      transition: border-bottom 0.3s, box-shadow 0.3s;
+    }
+    #navbar.scrolled {
+      border-bottom: 2px solid var(--green);
+      box-shadow: 0 2px 18px rgba(30,61,42,0.10);
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .nav-logo .logo-name {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 0.02em;
+    }
+    .nav-logo .logo-sub {
+      font-size: 0.68rem;
+      letter-spacing: 0.13em;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--charcoal);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .lang-toggle {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--green);
+      cursor: pointer;
+      border: 1px solid var(--green);
+      border-radius: 20px;
+      padding: 4px 12px;
+      transition: background 0.2s, color 0.2s;
+      user-select: none;
+    }
+    .lang-toggle:hover { background: var(--green); color: var(--white); }
+
+    .btn-nav {
+      background: var(--green);
+      color: var(--white) !important;
+      border-radius: 6px;
+      padding: 8px 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      transition: background 0.2s;
+    }
+    .btn-nav:hover { background: var(--green-dark); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--green);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-image: url('images/hero.png');
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(20,15,5,0.58);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 1.5rem;
+      max-width: 780px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(184,146,42,0.18);
+      border: 1px solid rgba(184,146,42,0.55);
+      border-radius: 30px;
+      padding: 6px 18px;
+      font-size: 0.78rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-loc {
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      color: rgba(245,234,214,0.75);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--gold);
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-icons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem 1.8rem;
+      margin-bottom: 2.2rem;
+      font-size: 0.82rem;
+      color: rgba(245,234,214,0.82);
+      letter-spacing: 0.05em;
+    }
+    .hero-icons span { white-space: nowrap; }
+
+    .hero-btns {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: 14px 32px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--cream);
+      border: 2px solid rgba(245,234,214,0.7);
+      border-radius: 8px;
+      padding: 12px 30px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-outline:hover {
+      background: rgba(245,234,214,0.12);
+      border-color: var(--cream);
+      transform: translateY(-2px);
+    }
+
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: rgba(245,234,214,0.75);
+      letter-spacing: 0.08em;
+    }
+    .pulse-dot {
+      width: 8px; height: 8px;
+      background: #5ecb6e;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.6; }
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      color: rgba(245,234,214,0.5);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      animation: bounce 2.5s infinite;
+    }
+    .hero-scroll i { font-size: 1.1rem; }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── PILLARS ── */
+    #pillars {
+      background: var(--white);
+      padding: 5rem 5%;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .pillar-card {
+      text-align: center;
+      padding: 2.2rem 1.5rem;
+      border-radius: var(--radius);
+      border: 1.5px solid rgba(30,61,42,0.1);
+      box-shadow: var(--shadow);
+      background: var(--white);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .pillar-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(30,61,42,0.16); }
+    .pillar-icon {
+      font-size: 2rem;
+      margin-bottom: 0.9rem;
+    }
+    .pillar-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--green);
+      margin-bottom: 0.6rem;
+    }
+    .pillar-card p {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── FORMULES ── */
+    #formules {
+      background: var(--ivory);
+      padding: 5rem 5%;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-header h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+    .section-header p {
+      color: #666;
+      font-size: 1rem;
+      font-weight: 300;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .formules-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto 2.5rem;
+    }
+    .formule-card {
+      background: var(--white);
+      border: 2px solid var(--green);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .formule-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(30,61,42,0.16); }
+    .formule-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+    .formule-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--green);
+      margin-bottom: 0.3rem;
+    }
+    .formule-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .formule-card ul {
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+    .formule-card ul li {
+      font-size: 0.9rem;
+      color: #555;
+      padding: 0.25rem 0;
+      font-weight: 300;
+    }
+    .formule-card ul li::before {
+      content: '· ';
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .formule-note {
+      font-size: 0.82rem;
+      color: var(--green);
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+
+    .alacarte-link {
+      text-align: center;
+    }
+    .alacarte-link a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--green);
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-bottom: 1.5px solid var(--gold);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+    .alacarte-link a:hover { color: var(--gold); }
+
+    /* ── SEASONAL ── */
+    #seasonal {
+      background: var(--green);
+      padding: 5.5rem 5%;
+      color: var(--cream);
+    }
+    #seasonal .section-label { color: var(--gold); }
+    #seasonal .section-header h2 { color: var(--cream); }
+    #seasonal .section-header p { color: rgba(245,234,214,0.78); }
+
+    .seasons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .season-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(245,234,214,0.18);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .season-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-3px); }
+    .season-emoji { font-size: 2.2rem; margin-bottom: 0.7rem; }
+    .season-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .season-card p {
+      font-size: 0.85rem;
+      color: rgba(245,234,214,0.72);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* ── SIGNATURE ── */
+    #signature {
+      background: var(--white);
+      padding: 5rem 5%;
+    }
+    .signature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .signature-card {
+      background: var(--white);
+      border: 2px solid var(--green);
+      border-radius: var(--radius);
+      padding: 2.2rem 1.8rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .signature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(30,61,42,0.16); }
+    .sig-badge {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 20px;
+      padding: 3px 10px;
+    }
+    .sig-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+    .signature-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--green);
+      margin-bottom: 0.6rem;
+    }
+    .signature-card p {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* ── GALLERY ── */
+    #gallery {
+      background: var(--charcoal);
+      padding: 5rem 5%;
+    }
+    #gallery .section-label { color: var(--gold); }
+    #gallery .section-header h2 { color: var(--cream); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 280px 280px;
+      gap: 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .gallery-item {
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .gallery-item:hover { border-color: var(--green); }
+    .gallery-item.wide {
+      grid-column: 1 / -1;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    /* ── TERRACE ── */
+    #terrace {
+      background: var(--ivory);
+      padding: 5.5rem 5%;
+    }
+    .terrace-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .terrace-img img {
+      width: 100%;
+      border-radius: var(--radius);
+      border: 3px solid var(--green);
+      box-shadow: var(--shadow);
+    }
+    .terrace-text h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--charcoal);
+      margin-bottom: 1.2rem;
+    }
+    .terrace-text p {
+      font-size: 1rem;
+      color: #555;
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .terrace-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--green);
+      font-weight: 500;
+      margin-top: 0.4rem;
+    }
+    .terrace-feature i { color: var(--gold); }
+
+    /* ── REVIEWS ── */
+    #reviews {
+      background: var(--white);
+      padding: 5rem 5%;
+    }
+    .ta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(30,61,42,0.07);
+      border: 1px solid rgba(30,61,42,0.15);
+      border-radius: 30px;
+      padding: 8px 20px;
+      font-size: 0.82rem;
+      color: var(--green);
+      font-weight: 500;
+      margin-bottom: 2.5rem;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto 2.5rem;
+    }
+    .review-card {
+      background: var(--ivory);
+      border-radius: var(--radius);
+      padding: 2rem 1.8rem;
+      border: 1.5px solid rgba(30,61,42,0.1);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .review-stars {
+      color: var(--gold);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.1em;
+    }
+    .review-card p {
+      font-size: 0.9rem;
+      color: #444;
+      font-style: italic;
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+    .review-source {
+      font-size: 0.75rem;
+      color: var(--green);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .quote-mark {
+      position: absolute;
+      top: 1.2rem; right: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      color: rgba(184,146,42,0.15);
+      line-height: 1;
+    }
+    .ta-btn-wrap { text-align: center; }
+    .btn-ta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--green);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-ta:hover { background: var(--green-dark); transform: translateY(-2px); }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--green-dark);
+      padding: 5.5rem 5%;
+      color: var(--cream);
+    }
+    #contact .section-label { color: var(--gold); }
+    #contact .section-header h2 { color: var(--cream); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-info-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(245,234,214,0.1);
+    }
+    .info-item:last-of-type { border-bottom: none; }
+    .info-item i {
+      color: var(--gold);
+      width: 20px;
+      margin-top: 3px;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .info-item .info-text {
+      font-size: 0.9rem;
+      color: rgba(245,234,214,0.85);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .info-item .info-text strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+    .info-item .info-text a {
+      color: var(--gold);
+      transition: opacity 0.2s;
+    }
+    .info-item .info-text a:hover { opacity: 0.8; }
+
+    .hours-table {
+      font-size: 0.88rem;
+      color: rgba(245,234,214,0.8);
+      font-weight: 300;
+      line-height: 1.9;
+    }
+    .hours-table span { color: var(--gold); font-weight: 500; }
+
+    .map-wrap {
+      margin-top: 1.8rem;
+    }
+
+    .amenities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .amenity-tag {
+      background: rgba(245,234,214,0.1);
+      border: 1px solid rgba(245,234,214,0.2);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      color: rgba(245,234,214,0.8);
+      letter-spacing: 0.06em;
+    }
+
+    /* Reservation Form */
+    .res-form {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(245,234,214,0.14);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+    }
+    .res-form h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--cream);
+      margin-bottom: 1.8rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label {
+      font-size: 0.78rem;
+      color: rgba(245,234,214,0.7);
+      font-weight: 400;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(245,234,214,0.2);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(245,234,214,0.35); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group select option { background: var(--green-dark); color: var(--cream); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .btn-submit {
+      width: 100%;
+      background: var(--green);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-submit:hover { background: #2a5238; transform: translateY(-2px); }
+    .form-success {
+      display: none;
+      background: rgba(94,203,110,0.12);
+      border: 1px solid rgba(94,203,110,0.4);
+      border-radius: 8px;
+      padding: 14px 18px;
+      color: #8edd9a;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green-dark);
+      border-top: 1px solid rgba(184,146,42,0.3);
+      padding: 2.5rem 5%;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-logo .logo-name {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--gold);
+    }
+    .footer-logo .logo-sub {
+      font-size: 0.72rem;
+      color: rgba(245,234,214,0.55);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .footer-center {
+      font-size: 0.78rem;
+      color: rgba(245,234,214,0.45);
+      text-align: center;
+      line-height: 1.7;
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.2rem;
+    }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      transition: opacity 0.2s;
+    }
+    .footer-links a:hover { opacity: 0.7; }
+
+    /* ── MOBILE NAV ── */
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px; left: 0; right: 0;
+      background: var(--ivory);
+      border-bottom: 2px solid var(--green);
+      padding: 1.5rem 5%;
+      z-index: 999;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links, .btn-nav { display: none; }
+      .hamburger { display: flex; }
+
+      .pillars-grid { grid-template-columns: 1fr 1fr; }
+      .formules-grid { grid-template-columns: 1fr; }
+      .seasons-grid { grid-template-columns: 1fr 1fr; }
+      .signature-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-rows: 220px 220px 220px; }
+      .gallery-item.wide { grid-column: 1; }
+      .terrace-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-inner { flex-direction: column; text-align: center; align-items: center; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+      .seasons-grid { grid-template-columns: 1fr; }
+      #hero h1 { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo" aria-label="Mykene home">
+    <span class="logo-name">Mykene</span>
+    <span class="logo-sub">Brasserie · Muntstraat 44 · Leuven</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#formules" data-nl="Menu" data-en="Menu">Menu</a></li>
+    <li><a href="#seasonal" data-nl="Seizoen" data-en="Season">Seizoen</a></li>
+    <li><a href="#terrace" data-nl="Terras" data-en="Terrace">Terras</a></li>
+    <li><a href="#contact" data-nl="Reservatie" data-en="Reservation">Reservatie</a></li>
+    <li><a href="#contact" data-nl="Contact" data-en="Contact">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="lang-toggle" id="langToggle">NL | EN</div>
+    <a href="#contact" class="btn-nav" data-nl="Reserveer" data-en="Reserve">Reserveer</a>
+    <div class="hamburger" id="hamburger" aria-label="Menu openen">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="#formules" data-nl="Menu" data-en="Menu">Menu</a>
+  <a href="#seasonal" data-nl="Seizoen" data-en="Season">Seizoen</a>
+  <a href="#terrace" data-nl="Terras" data-en="Terrace">Terras</a>
+  <a href="#contact" data-nl="Reservatie" data-en="Reservation">Reservatie</a>
+  <a href="#contact" data-nl="Contact" data-en="Contact">Contact</a>
+</div>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🏆 <span data-nl="TripAdvisor Travelers' Choice" data-en="TripAdvisor Travelers' Choice">TripAdvisor Travelers' Choice</span></div>
+    <p class="hero-loc">— Muntstraat 44 · Leuven —</p>
+    <h1>Mykene</h1>
+    <p class="hero-sub" data-nl="Pure Belgische keuken in een 17e-eeuws herenhuis" data-en="Pure Belgian cuisine in a 17th century mansion">Pure Belgische keuken in een 17e-eeuws herenhuis</p>
+    <div class="hero-icons">
+      <span>🌿 <span data-nl="Seizoensgebonden" data-en="Seasonal">Seizoensgebonden</span></span>
+      <span>🍺 <span data-nl="Belgisch bier" data-en="Belgian beer">Belgisch bier</span></span>
+      <span>♿ <span data-nl="Toegankelijk" data-en="Accessible">Toegankelijk</span></span>
+      <span>🌱 <span data-nl="Vegan opties" data-en="Vegan options">Vegan opties</span></span>
+    </div>
+    <div class="hero-btns">
+      <a href="#formules" class="btn-primary" data-nl="Bekijk ons menu" data-en="View our menu">Bekijk ons menu</a>
+      <a href="#contact" class="btn-outline" data-nl="Reserveer een tafel" data-en="Reserve a table">Reserveer een tafel</a>
+    </div>
+    <div class="hero-status">
+      <span class="pulse-dot"></span>
+      <span data-nl="Ma–Za open · Lunch 11:30 · Diner 17:30" data-en="Mon–Sat open · Lunch 11:30 · Dinner 17:30">Ma–Za open · Lunch 11:30 · Diner 17:30</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- ── PILLARS ── -->
+<section id="pillars">
+  <div class="pillars-grid">
+    <div class="pillar-card fade-up">
+      <div class="pillar-icon">🌿</div>
+      <h3 data-nl="Seizoensgebonden" data-en="Seasonal">Seizoensgebonden</h3>
+      <p data-nl="Chef Stijn Gille werkt uitsluitend met verse, seizoensgebonden ingrediënten" data-en="Chef Stijn Gille works exclusively with fresh, seasonal ingredients">Chef Stijn Gille werkt uitsluitend met verse, seizoensgebonden ingrediënten</p>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="pillar-icon">🍺</div>
+      <h3 data-nl="Belgisch bier" data-en="Belgian beer">Belgisch bier</h3>
+      <p data-nl="Uitzonderlijke bierselectie — ook verwerkt in onze gerechten" data-en="Exceptional beer selection — also used in our dishes">Uitzonderlijke bierselectie — ook verwerkt in onze gerechten</p>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="pillar-icon">🌱</div>
+      <h3 data-nl="Voor iedereen" data-en="For everyone">Voor iedereen</h3>
+      <p data-nl="Vegetarisch, vegan, keto &amp; glutenvrij — uniek in Leuven" data-en="Vegetarian, vegan, keto &amp; gluten-free — unique in Leuven">Vegetarisch, vegan, keto &amp; glutenvrij — uniek in Leuven</p>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="pillar-icon">👥</div>
+      <h3 data-nl="Grote groepen" data-en="Large groups">Grote groepen</h3>
+      <p data-nl="Twee aparte zalen voor groepen tot 60 personen" data-en="Two separate halls for groups up to 60 people">Twee aparte zalen voor groepen tot 60 personen</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FORMULES ── -->
+<section id="formules">
+  <div class="section-header fade-up">
+    <span class="section-label" data-nl="Onze formules" data-en="Our formulas">Onze formules</span>
+    <h2 data-nl="Onze Formules" data-en="Our Formulas">Onze Formules</h2>
+    <p data-nl="Heerlijke Belgische maaltijden voor elk budget en moment" data-en="Delicious Belgian meals for every budget and occasion">Heerlijke Belgische maaltijden voor elk budget en moment</p>
+  </div>
+  <div class="formules-grid">
+    <div class="formule-card fade-up">
+      <div class="formule-icon">🍽️</div>
+      <h3 data-nl="Budget Lunch" data-en="Budget Lunch">Budget Lunch</h3>
+      <div class="formule-price">€21.50</div>
+      <ul>
+        <li data-nl="Glas bubbels" data-en="Glass of bubbles">Glas bubbels</li>
+        <li data-nl="Soep" data-en="Soup">Soep</li>
+        <li data-nl="Hoofdgerecht" data-en="Main course">Hoofdgerecht</li>
+        <li data-nl="Koffie" data-en="Coffee">Koffie</li>
+      </ul>
+      <p class="formule-note" data-nl="Ook in vegetarische versie beschikbaar." data-en="Also available in vegetarian version.">Ook in vegetarische versie beschikbaar.</p>
+    </div>
+    <div class="formule-card fade-up">
+      <div class="formule-icon">🍷</div>
+      <h3 data-nl="Dagmenu" data-en="Day Menu">Dagmenu</h3>
+      <div class="formule-price">€38</div>
+      <ul>
+        <li data-nl="Voorgerecht" data-en="Starter">Voorgerecht</li>
+        <li data-nl="Hoofdgerecht" data-en="Main course">Hoofdgerecht</li>
+        <li data-nl="Dessert" data-en="Dessert">Dessert</li>
+        <li data-nl="¼ liter wijn inbegrepen" data-en="¼ litre wine included">¼ liter wijn inbegrepen</li>
+      </ul>
+      <p class="formule-note" data-nl="Middag én avond beschikbaar." data-en="Available for both lunch and dinner.">Middag én avond beschikbaar.</p>
+    </div>
+  </div>
+  <div class="alacarte-link fade-up">
+    <a href="https://www.mykene.be/en/menu/a-la-carte" target="_blank" rel="noopener">
+      <span data-nl="À la carte menu op aanvraag" data-en="À la carte menu on request">À la carte menu op aanvraag</span>
+      <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+</section>
+
+<!-- ── SEASONAL ── -->
+<section id="seasonal">
+  <div class="section-header fade-up">
+    <span class="section-label" data-nl="De seizoenen" data-en="The seasons">De seizoenen</span>
+    <h2 data-nl="Met het ritme van de seizoenen" data-en="With the rhythm of the seasons">Met het ritme van de seizoenen</h2>
+    <p data-nl="Chef Stijn Gille past de kaart aan met de seizoenen — asperges in maart, mosselen in juli, wild in de herfst." data-en="Chef Stijn Gille adapts the menu with the seasons — asparagus in March, mussels in July, game in autumn.">Chef Stijn Gille past de kaart aan met de seizoenen — asperges in maart, mosselen in juli, wild in de herfst.</p>
+  </div>
+  <div class="seasons-grid">
+    <div class="season-card fade-up">
+      <div class="season-emoji">🌸</div>
+      <h3 data-nl="Lente" data-en="Spring">Lente</h3>
+      <p>Asperges · Lentekruiden · Frisheid</p>
+    </div>
+    <div class="season-card fade-up">
+      <div class="season-emoji">☀️</div>
+      <h3 data-nl="Zomer" data-en="Summer">Zomer</h3>
+      <p>Mosselen · Zomerse salades · Terras</p>
+    </div>
+    <div class="season-card fade-up">
+      <div class="season-emoji">🍂</div>
+      <h3 data-nl="Herfst" data-en="Autumn">Herfst</h3>
+      <p>Wild · Paddenstoelen · Rijke smaken</p>
+    </div>
+    <div class="season-card fade-up">
+      <div class="season-emoji">❄️</div>
+      <h3 data-nl="Winter" data-en="Winter">Winter</h3>
+      <p>Stoofgerechten · Hartelijk · Verwarmend</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── SIGNATURE ── -->
+<section id="signature">
+  <div class="section-header fade-up">
+    <span class="section-label" data-nl="Handtekening" data-en="Signature">Handtekening</span>
+    <h2 data-nl="Onze Handtekening" data-en="Our Signature">Onze Handtekening</h2>
+    <p data-nl="De gerechten waar onze gasten keer op keer voor terugkomen" data-en="The dishes our guests come back for again and again">De gerechten waar onze gasten keer op keer voor terugkomen</p>
+  </div>
+  <div class="signature-grid">
+    <div class="signature-card fade-up">
+      <span class="sig-badge" data-nl="Sterk aanbevolen" data-en="Highly recommended">⭐ Sterk aanbevolen</span>
+      <div class="sig-icon">🥩</div>
+      <h3 data-nl="BBQ Spareribs" data-en="BBQ Spareribs">BBQ Spareribs</h3>
+      <p data-nl="Onze beroemde spareribs — mals, gegrild tot perfectie. Sterk aanbevolen door onze gasten." data-en="Our famous spareribs — tender, grilled to perfection. Highly recommended by our guests.">Onze beroemde spareribs — mals, gegrild tot perfectie. Sterk aanbevolen door onze gasten.</p>
+    </div>
+    <div class="signature-card fade-up">
+      <div class="sig-icon">🐟</div>
+      <h3 data-nl="Noorse Zalm" data-en="Norwegian Salmon">Noorse Zalm</h3>
+      <p data-nl="Verse Noorse zalm, seizoensgebonden bereid door chef Stijn Gille." data-en="Fresh Norwegian salmon, seasonally prepared by chef Stijn Gille.">Verse Noorse zalm, seizoensgebonden bereid door chef Stijn Gille.</p>
+    </div>
+    <div class="signature-card fade-up">
+      <div class="sig-icon">🥔</div>
+      <h3 data-nl="Jacket Potato" data-en="Jacket Potato">Jacket Potato</h3>
+      <p data-nl="Uniek in Leuven en omgeving — onze beroemde jacket potato bereiding." data-en="Unique in Leuven and surroundings — our famous jacket potato preparation.">Uniek in Leuven en omgeving — onze beroemde jacket potato bereiding.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section id="gallery">
+  <div class="section-header fade-up">
+    <span class="section-label" data-nl="Sfeer" data-en="Atmosphere">Sfeer</span>
+    <h2 data-nl="Bij ons" data-en="At Mykene">Bij ons</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item fade-up">
+      <img src="images/food-1.png" alt="Mykene gerecht" loading="lazy" />
+    </div>
+    <div class="gallery-item fade-up">
+      <img src="images/food-2.png" alt="Mykene gerecht" loading="lazy" />
+    </div>
+    <div class="gallery-item wide fade-up">
+      <img src="images/terrace.png" alt="Mykene terras op de Muntstraat" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ── TERRACE ── -->
+<section id="terrace">
+  <div class="terrace-grid">
+    <div class="terrace-img fade-up">
+      <img src="images/terrace.png" alt="Mykene terras Muntstraat Leuven" loading="lazy" />
+    </div>
+    <div class="terrace-text fade-up">
+      <span class="section-label" data-nl="Buiten genieten" data-en="Outdoor dining">Buiten genieten</span>
+      <h2 data-nl="Ons Terras" data-en="Our Terrace">Ons Terras</h2>
+      <p data-nl="Geniet van pure Belgische keuken op ons aangename terras op de Muntstraat — dé restaurantstraat van Leuven." data-en="Enjoy pure Belgian cuisine on our pleasant terrace on Muntstraat — Leuven's restaurant street.">Geniet van pure Belgische keuken op ons aangename terras op de Muntstraat — dé restaurantstraat van Leuven.</p>
+      <p data-nl="Een perfect plekje om te genieten van seizoensgebonden gerechten en uitzonderlijke Belgische bieren in het hart van de stad." data-en="A perfect spot to enjoy seasonal dishes and exceptional Belgian beers in the heart of the city.">Een perfect plekje om te genieten van seizoensgebonden gerechten en uitzonderlijke Belgische bieren in het hart van de stad.</p>
+      <div class="terrace-feature"><i class="fas fa-map-marker-alt"></i> <span data-nl="Muntstraat 44 — Leuvens populairste restaurantstraat" data-en="Muntstraat 44 — Leuven's most popular restaurant street">Muntstraat 44 — Leuvens populairste restaurantstraat</span></div>
+      <div class="terrace-feature"><i class="fas fa-sun"></i> <span data-nl="Beschut terras, ideaal in de zomer" data-en="Sheltered terrace, ideal in summer">Beschut terras, ideaal in de zomer</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section id="reviews">
+  <div class="section-header fade-up">
+    <span class="section-label" data-nl="Recensies" data-en="Reviews">Recensies</span>
+    <h2 data-nl="Wat onze gasten zeggen" data-en="What our guests say">Wat onze gasten zeggen</h2>
+    <div class="ta-badge">
+      <i class="fas fa-trophy"></i>
+      <span data-nl="#46 van 391 restaurants in Leuven · 4.1/5 op basis van 2267 beoordelingen" data-en="#46 of 391 restaurants in Leuven · 4.1/5 based on 2267 reviews">#46 van 391 restaurants in Leuven · 4.1/5 op basis van 2267 beoordelingen</span>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card fade-up">
+      <div class="quote-mark">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p>"I visit Leuven every several weeks from the USA. My first choice for a meal is always Mykene. The attention to specific diets is outstanding. Every meal has been outstanding."</p>
+      <div class="review-source">TripAdvisor</div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="quote-mark">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p>"We had dinner with a group of around 60 people — a great experience. Homemade parmesan croquettes, Norwegian salmon, coupe dame blanche. All very tasty and nicely presented."</p>
+      <div class="review-source">Restaurant Guru</div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="quote-mark">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p>"We had a wonderful barbeque spareribs menu. We can highly recommend this place."</p>
+      <div class="review-source">TripAdvisor</div>
+    </div>
+  </div>
+  <div class="ta-btn-wrap fade-up">
+    <a href="https://www.tripadvisor.com/Restaurant_Review-g188643-d1019960-Reviews-Mykene-Leuven_Flemish_Brabant_Province_Flemish_Region.html" target="_blank" rel="noopener" class="btn-ta">
+      <i class="fas fa-external-link-alt"></i>
+      <span data-nl="Lees alle recensies op TripAdvisor" data-en="Read all reviews on TripAdvisor">Lees alle recensies op TripAdvisor</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── CONTACT & RESERVATION ── -->
+<section id="contact">
+  <div class="section-header fade-up">
+    <span class="section-label" data-nl="Reservatie & Contact" data-en="Reservation & Contact">Reservatie &amp; Contact</span>
+    <h2 data-nl="Kom langs of reserveer" data-en="Visit us or reserve">Kom langs of reserveer</h2>
+  </div>
+  <div class="contact-grid">
+    <!-- Left: info -->
+    <div class="contact-info-block fade-up">
+      <div class="info-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <div class="info-text"><strong>Muntstraat 44, 3000 Leuven</strong></div>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-phone"></i>
+        <div class="info-text"><a href="tel:+3216237523">+32 16 23 75 23</a></div>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-envelope"></i>
+        <div class="info-text"><a href="mailto:info@mykene.be">info@mykene.be</a></div>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-globe"></i>
+        <div class="info-text"><a href="https://www.mykene.be" target="_blank" rel="noopener">mykene.be</a></div>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-clock"></i>
+        <div class="info-text">
+          <div class="hours-table" id="hoursTable">
+            <span data-nl="Ma–Za" data-en="Mon–Sat">Ma–Za</span>: <span data-nl="Lunch 11:30–14:00 / Diner 17:30–21:30" data-en="Lunch 11:30–14:00 / Dinner 17:30–21:30">Lunch 11:30–14:00 / Diner 17:30–21:30</span><br/>
+            <span data-nl="Zo" data-en="Sun">Zo</span>: <span style="color:rgba(245,234,214,0.5)" data-nl="Gesloten" data-en="Closed">Gesloten</span>
+          </div>
+        </div>
+      </div>
+      <div class="amenities">
+        <span class="amenity-tag" data-nl="🌱 Vegetarisch" data-en="🌱 Vegetarian">🌱 Vegetarisch</span>
+        <span class="amenity-tag" data-nl="🌿 Vegan" data-en="🌿 Vegan">🌿 Vegan</span>
+        <span class="amenity-tag" data-nl="💪 Keto" data-en="💪 Keto">💪 Keto</span>
+        <span class="amenity-tag" data-nl="🌾 Glutenvrij" data-en="🌾 Gluten-free">🌾 Glutenvrij</span>
+        <span class="amenity-tag" data-nl="♿ Rolstoeltoegankelijk" data-en="♿ Wheelchair accessible">♿ Rolstoeltoegankelijk</span>
+        <span class="amenity-tag" data-nl="🎁 Cadeaubons" data-en="🎁 Gift certificates">🎁 Cadeaubons</span>
+      </div>
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps?q=Muntstraat+44,+3000+Leuven&output=embed"
+          width="100%"
+          height="300"
+          style="border:0;border-radius:12px;opacity:0.9;"
+          allowfullscreen
+          loading="lazy"
+          title="Mykene op Google Maps">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Right: form -->
+    <div class="res-form fade-up">
+      <h3 data-nl="Tafel reserveren" data-en="Reserve a table">Tafel reserveren</h3>
+      <form id="resForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-nl="Naam" data-en="Name">Naam</label>
+            <input type="text" id="resName" data-nl-placeholder="Uw naam" data-en-placeholder="Your name" placeholder="Uw naam" required />
+          </div>
+          <div class="form-group">
+            <label data-nl="Email" data-en="Email">Email</label>
+            <input type="email" id="resEmail" data-nl-placeholder="uw@email.be" data-en-placeholder="your@email.com" placeholder="uw@email.be" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-nl="Datum" data-en="Date">Datum</label>
+            <input type="date" id="resDate" required />
+          </div>
+          <div class="form-group">
+            <label data-nl="Tijd" data-en="Time">Tijd</label>
+            <select id="resTime" required>
+              <option value="" data-nl="Kies een tijd" data-en="Choose a time">Kies een tijd</option>
+              <option value="11:30">11:30 — Lunch</option>
+              <option value="12:00">12:00 — Lunch</option>
+              <option value="12:30">12:30 — Lunch</option>
+              <option value="13:00">13:00 — Lunch</option>
+              <option value="13:30">13:30 — Lunch</option>
+              <option value="17:30">17:30 — Diner</option>
+              <option value="18:00">18:00 — Diner</option>
+              <option value="18:30">18:30 — Diner</option>
+              <option value="19:00">19:00 — Diner</option>
+              <option value="19:30">19:30 — Diner</option>
+              <option value="20:00">20:00 — Diner</option>
+              <option value="20:30">20:30 — Diner</option>
+              <option value="21:00">21:00 — Diner</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-nl="Aantal personen" data-en="Guests">Aantal personen</label>
+            <select id="resGuests" required>
+              <option value="" data-nl="Aantal" data-en="Number">Aantal</option>
+              <option value="1-2" data-nl="1–2 personen" data-en="1–2 guests">1–2 personen</option>
+              <option value="3-5" data-nl="3–5 personen" data-en="3–5 guests">3–5 personen</option>
+              <option value="6-15" data-nl="6–15 personen" data-en="6–15 guests">6–15 personen</option>
+              <option value="15+" data-nl="15+ personen" data-en="15+ guests">15+ personen</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-nl="Dieetwensen" data-en="Dietary needs">Dieetwensen</label>
+            <select id="resDiet">
+              <option value="geen" data-nl="Geen" data-en="None">Geen</option>
+              <option value="vegetarisch" data-nl="Vegetarisch" data-en="Vegetarian">Vegetarisch</option>
+              <option value="vegan" data-nl="Vegan" data-en="Vegan">Vegan</option>
+              <option value="glutenvrij" data-nl="Glutenvrij" data-en="Gluten-free">Glutenvrij</option>
+              <option value="keto" data-nl="Keto" data-en="Keto">Keto</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-nl="Opmerking" data-en="Notes">Opmerking</label>
+          <textarea id="resNote" data-nl-placeholder="Bijzondere wensen, allergieën…" data-en-placeholder="Special requests, allergies…" placeholder="Bijzondere wensen, allergieën…"></textarea>
+        </div>
+        <button type="submit" class="btn-submit" data-nl="Reserveer →" data-en="Reserve →">Reserveer →</button>
+        <div class="form-success" id="formSuccess" data-nl="Bedankt! We bevestigen uw reservatie zo snel mogelijk." data-en="Thank you! We'll confirm your reservation soon.">
+          Bedankt! We bevestigen uw reservatie zo snel mogelijk.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="logo-name">Mykene</div>
+      <div class="logo-sub" data-nl="Belgische Brasserie · Muntstraat 44 · Leuven" data-en="Belgian Brasserie · Muntstraat 44 · Leuven">Belgische Brasserie · Muntstraat 44 · Leuven</div>
+    </div>
+    <div class="footer-center">
+      © 2026 Mykene &nbsp;·&nbsp; <span data-nl="Zo gesloten" data-en="Sun closed">Zo gesloten</span> &nbsp;·&nbsp; <a href="mailto:info@mykene.be" style="color:rgba(245,234,214,0.45)">info@mykene.be</a>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.tripadvisor.com/Restaurant_Review-g188643-d1019960-Reviews-Mykene-Leuven_Flemish_Brabant_Province_Flemish_Region.html" target="_blank" rel="noopener">TripAdvisor</a>
+      <a href="https://www.mykene.be" target="_blank" rel="noopener">mykene.be</a>
+      <a href="https://www.google.com/maps?q=Muntstraat+44,+3000+Leuven" target="_blank" rel="noopener">Google Maps</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Language toggle ──
+  const translations = {
+    nl: {
+      'html-lang': 'nl',
+      'page-title': 'Mykene — Belgische Brasserie · Muntstraat 44 · Leuven',
+    },
+    en: {
+      'html-lang': 'en',
+      'page-title': 'Mykene — Belgian Brasserie · Muntstraat 44 · Leuven',
+    }
+  };
+
+  let currentLang = 'nl';
+
+  function applyLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.title = translations[lang]['page-title'];
+
+    // Update all data-nl / data-en text nodes
+    document.querySelectorAll('[data-nl], [data-en]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val !== null) {
+        el.textContent = val;
+      }
+    });
+
+    // Update placeholder attributes
+    document.querySelectorAll('[data-nl-placeholder], [data-en-placeholder]').forEach(el => {
+      const ph = el.getAttribute('data-' + lang + '-placeholder');
+      if (ph) el.placeholder = ph;
+    });
+
+    // Update lang toggle label
+    const toggle = document.getElementById('langToggle');
+    toggle.textContent = lang === 'nl' ? 'NL | EN' : 'EN | NL';
+
+    // Update select options
+    document.querySelectorAll('select option[data-nl]').forEach(opt => {
+      const val = opt.getAttribute('data-' + lang);
+      if (val) opt.textContent = val;
+    });
+
+    // Form success message
+    const success = document.getElementById('formSuccess');
+    if (success) {
+      const msg = success.getAttribute('data-' + lang);
+      if (msg) success.textContent = msg;
+    }
+  }
+
+  document.getElementById('langToggle').addEventListener('click', () => {
+    applyLang(currentLang === 'nl' ? 'en' : 'nl');
+  });
+
+  // ── Navbar scroll ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // ── Hamburger ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // ── IntersectionObserver fade-up ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ── Reservation form ──
+  document.getElementById('resForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('resName').value.trim();
+    const email = document.getElementById('resEmail').value.trim();
+    const date = document.getElementById('resDate').value;
+    const time = document.getElementById('resTime').value;
+    const guests = document.getElementById('resGuests').value;
+
+    if (!name || !email || !date || !time || !guests) {
+      return;
+    }
+
+    const success = document.getElementById('formSuccess');
+    success.style.display = 'block';
+    this.querySelectorAll('input,select,textarea,button').forEach(el => el.disabled = true);
+
+    const msg = success.getAttribute('data-' + currentLang);
+    if (msg) success.textContent = msg;
+  });
+</script>
+</body>
+</html>
